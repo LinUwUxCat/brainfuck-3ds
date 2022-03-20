@@ -77,20 +77,14 @@ int main(int argc, char* argv[]){
   printf("\x1b[2;0HIs button touched?");
 
   while (aptMainLoop()){
-		//Scan all the inputs. This should be done once for each frame
-		hidScanInput();
 
-		//hidKeysDown returns information about which buttons have been just pressed (and they weren't in the previous frame)
+		hidScanInput();
 		u32 kDown = hidKeysDown();
 
-		if (kDown & KEY_START) break; // break in order to return to hbmenu
+		if (kDown & KEY_START) break;
 
 		touchPosition touch;
-
-		//Read the touch screen coordinates
 		hidTouchRead(&touch);
-
-
 
     C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
 		C2D_TargetClear(bottom, white);
@@ -121,7 +115,7 @@ int main(int argc, char* argv[]){
 
     C3D_FrameEnd(0);
 	}
-  
+
 	C2D_Fini();
 	C3D_Fini();
 	gfxExit();
